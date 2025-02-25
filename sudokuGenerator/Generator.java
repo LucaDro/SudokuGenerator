@@ -6,12 +6,14 @@ public class Generator {
     Random random = new Random();
 
     public void main(String[] args) {
+        // main function to create a sudoku
         Integer[][] sudoku = createEmptySudoku();
         fillSquare(sudoku, 0, 0);
         printSudoku(sudoku);
     }
 
     private Integer[][] createEmptySudoku() {
+        // Creates an empty 9x9 grid that will be the grid that you fill to make the sudoku
         Integer[][] sudoku = new Integer[9][9];
         for(int i=0; i<sudoku.length; i++){
             for(int j=0; j<sudoku[0].length; j++){
@@ -22,6 +24,7 @@ public class Generator {
     }
 
     private void printSudoku(Integer[][] array){
+        // function to print the sudoku
         for(int i=0; i<array.length; i++){
                 for(int j=0; j<array[0].length; j++){
                         System.out.print(array[i][j]);
@@ -31,26 +34,23 @@ public class Generator {
     }
 
     private Integer[][] fillSquare(Integer[][] sudoku, int x, int y){
-        printSudoku(sudoku);
+        // Fills square and recursively fills the next square
+        // Returns all the way when everything is filled
         ArrayList<Integer> tried = new ArrayList<>();
         do{
             int number = random.nextInt(9) + 1;
             System.out.println(number);
             if(tried.contains(number)){
-                System.out.println("contained");
                 continue;
             }
             tried.add(number);
             if(!checkColumn(sudoku, y, number)){
-                System.out.println("Column");
                 continue;
             }
             if(!checkRow(sudoku, x, number)){
-                System.out.println("row");
                 continue;
             }
             if(!checkBox(sudoku, x, y, number)){
-                System.out.println("box");
                 continue;
             }
             sudoku[x][y] = number;
@@ -79,6 +79,7 @@ public class Generator {
     }
 
     private boolean checkColumn(Integer[][] sudoku, int vertical, int number){
+        // Checks if a number is already in a column
         for(int hor=0; hor<9; hor++){
             if(number==sudoku[hor][vertical]){
                 return false;
@@ -88,6 +89,7 @@ public class Generator {
     }
 
     private boolean checkRow(Integer[][] sudoku, int horizontal, int number){
+        // Checks if a number is already in a row
         for(int ver=0; ver<9; ver++){
             if(number==sudoku[horizontal][ver]){
                 return false;
@@ -97,6 +99,7 @@ public class Generator {
     }
 
     private boolean checkBox(Integer[][] sudoku, int x, int y, int number){
+        // Checks if a number is already in a 3x3 box
         int xStart = (x/3)*3;
         int yStart = (y/3)*3;
         for(int hor=xStart; hor<xStart+3; hor++){
