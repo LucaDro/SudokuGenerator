@@ -26,10 +26,10 @@ public class Generator {
     private void printSudoku(Integer[][] array){
         // function to print the sudoku
         for(int i=0; i<array.length; i++){
-                for(int j=0; j<array[0].length; j++){
-                        System.out.print(array[i][j]);
-                }
-                System.out.println("");         
+            for(int j=0; j<array[0].length; j++){
+                    System.out.print(array[i][j]);
+            }
+            System.out.println("");         
         }
     }
 
@@ -38,8 +38,9 @@ public class Generator {
         // Returns all the way when everything is filled
         ArrayList<Integer> tried = new ArrayList<>();
         do{
+            // Takes random number so that the sudoku is unique every time
             int number = random.nextInt(9) + 1;
-            System.out.println(number);
+            // Checks if random number has already been tried or not
             if(tried.contains(number)){
                 continue;
             }
@@ -64,6 +65,7 @@ public class Generator {
                 }
             }
             sudoku = fillSquare(sudoku, newX, newY);
+            // Checks if sudoku is finished or not, if the last box is -1, then the sudoku is unfinished, otherwise it is finished.
             switch (sudoku[8][8]) {
                 case -1:
                     sudoku[8][8] = 0;

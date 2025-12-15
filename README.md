@@ -1,2 +1,2 @@
 # SudokuGenerator
-Repository that can generate solvable sudokus, it also has a sudoku solver.
+Repository that can generate full sudokus using brute force.
